@@ -125,7 +125,7 @@ if (update.equals("0")) {
     updateShare.edit().putString("firstUpdate", "1").apply();
 ```
 2.下载更新逻辑接入
-当你发现有更新逻辑时候，需要提供如下几个参数。例子中是以UpdateModel 为例子
+当你发现有更新逻辑时候，需要提供如下几个变量来控制版本更新策略。例子中是以UpdateModel 为例子
 ```
 private String now_version;//现在更新的版本
 private String old_version;//旧版本
@@ -133,9 +133,9 @@ private boolean allUpdate;//是否全量更新
 private boolean backToOld;//是否回退
 private String downurl;//更新地址
 ```
-这里更新逻辑是：
+版本更新逻辑：
 ![](https://raw.githubusercontent.com/yangyunfeng666/image/master/reactnative_1.png)
-这里我们代码如下
+更新代码如下
 ```
 public void update(UpdateModel updateModel) {
     if (updateModel.isBackToOld()) {
@@ -176,7 +176,7 @@ private void downLoadBundle(final String RemoteUrl, final String now_version) {
 }
 
 ```
-这里的UpdateModel 是模拟的网络数据返回的值，这个根据你实际情况而定，而且这里需要判断权限，你可以在进入app，或者在统一授权时候做这样更加的让体验好一点。这里下载完成后，有一个hander来处理下载线程和主线程通讯问题，而且当解压完成以后，需要重新注册组件
+这里的UpdateModel 是模拟的网络数据返回的值，这个根据你实际情况而定，而且这里需要判断权限，你可以在进入app，或者在统一授权时候添加此授权，这样更加的让体验好一点。需要定义一个hander来处理下载线程和主线程通讯问题，而且当解压完成以后，需要重新注册组件
 ```
 
 private class MyHander extends Handler {
@@ -211,7 +211,7 @@ private class MyHander extends Handler {
 @Override
 protected void onCreate(@Nullable Bundle savedInstanceState) {
 handler = new MyHander(this);
-//这个可以在准备进入react的前一个页面步骤注册。
+//建议在准备进入reactnative界面的前一个页面步骤注册。
 registLocalVersion();
 }
 /**
@@ -226,10 +226,10 @@ public void registLocalVersion() {
 }
 
 ```
-这里注册本地版本里面的test参数是程序的入口组件名称。这里的版本是从SharedPreferences读取的，可以根据具体情况而定。
+这里的test值是程序的入口组件名称。这个版本的值可以从持久化读取，比如SharedPreferences，可以根据具体情况而定。
 ### 加快reactnative加载解决
 让你的ractnative 入口类继承PreLoadReactActivity
-比如 替换以前继承的ReactActivity
+替换以前继承的ReactActivity
 ```
 public class ReactNativeActivity extends PreLoadReactActivity  {
     @javax.annotation.Nullable
@@ -239,5 +239,4 @@ public class ReactNativeActivity extends PreLoadReactActivity  {
     }
 }
 ```
-这里的test也是注册的组件名称。
 gitbub 地址：[项目地址](http://172.20.8.45/android_compoment/reactnativeupdate-android.git)
