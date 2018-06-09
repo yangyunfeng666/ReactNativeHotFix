@@ -1,4 +1,4 @@
-package com.yunsoft.reactnative;
+package com.yunsoft.reactnativeupdate;
 
 import android.util.Log;
 
@@ -149,7 +149,7 @@ public class MutilDownHelper {
                     downLoadAss.close();
                     randomAccessFile.close();
                     input.close();
-                    Log.e("show", "线程" + threadId + "下载关闭");
+//                    Log.e("show", "线程" + threadId + "下载关闭");
                     File f = new File(storePath.substring(0, storePath.lastIndexOf("/")), version + "_" + threadId + ".txt");
                     f.delete();//删除记录下载的文件
                     return 1;

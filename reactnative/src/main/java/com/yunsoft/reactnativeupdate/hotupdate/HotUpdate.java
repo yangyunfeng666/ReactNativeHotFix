@@ -1,11 +1,11 @@
-package com.yunsoft.reactnative.hotupdate;
+package com.yunsoft.reactnativeupdate.hotupdate;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
 
-import com.yunsoft.reactnative.FileConstant;
+import com.yunsoft.reactnativeupdate.FileConstant;
 
 import java.io.File;
 import java.io.FileWriter;

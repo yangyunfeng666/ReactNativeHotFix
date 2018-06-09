@@ -1,9 +1,9 @@
-package com.yunsoft.reactnative.hotupdate;
+package com.yunsoft.reactnativeupdate.hotupdate;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.yunsoft.reactnative.FileConstant;
+import com.yunsoft.reactnativeupdate.FileConstant;
 
 import java.io.File;
 import java.io.FileInputStream;

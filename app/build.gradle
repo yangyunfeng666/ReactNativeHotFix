@@ -9,7 +9,7 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.yunsoft.reactnativedemo"
+        applicationId "com.yunsoft.reactnative"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1

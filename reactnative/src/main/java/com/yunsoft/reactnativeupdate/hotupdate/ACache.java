@@ -1,4 +1,4 @@
-package com.yunsoft.reactnative.hotupdate;
+package com.yunsoft.reactnativeupdate.hotupdate;
 
 import android.content.Context;
 import android.graphics.Bitmap;

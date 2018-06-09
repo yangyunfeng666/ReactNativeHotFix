@@ -1,4 +1,4 @@
-package com.yunsoft.reactnative;
+package com.yunsoft.reactnativeupdate;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -24,8 +24,8 @@ public class UpdateUtil {
      * @param reactPicStartCharts reactnatvie 本地到包文件的名称的开始标识
      * @return
      */
-    public static ArrayList<DrawableModel> getResourceByReflect(String reactPicStartCharts) {
-        Class drawable = R.drawable.class;
+    public static ArrayList<DrawableModel> getResourceByReflect(Class Draw,String reactPicStartCharts) {
+        Class drawable = Draw;
         ArrayList<DrawableModel> arrayList = new ArrayList();
         Field[] fields = drawable.getDeclaredFields();
         for (Field field : fields) {
