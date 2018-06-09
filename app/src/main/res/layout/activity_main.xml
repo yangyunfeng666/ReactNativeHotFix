@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/refresh_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="没有旧版本增量更新到1.0.1"
+        />
+
+    <Button
+        android:id="@+id/oldVersionUpdate_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="以1.0.1为旧版本增量更新到1.0.3"
+        />
+
+    <Button
+        android:id="@+id/allUpdate_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="全量更新1.0.2版本"
+        />
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="回退版本到1.0.1"></Button>
+
+    <Button
+        android:id="@+id/into_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进入react"
+        />
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+{
+  "name": "Test",
+  "version": "1.0.0",
+  "description": "test object",
+  "main": "index.js",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "test"
+  ],
+  "author": "yangyunfeng",
+  "license": "ISC",
+  "dependencies": {
+    "react": "16.4.0",
+    "react-native": "^0.48.0"
+  }
+}
