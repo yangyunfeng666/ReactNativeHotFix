@@ -45,6 +45,10 @@ public class MutilDownHelper {
             int code = connection.getResponseCode();
             if (code == 200) {
                 int fileLength = connection.getContentLength();
+                File storeFile = new File(storePath.substring(0,storePath.lastIndexOf(File.separator)));
+                if(storeFile==null||!storeFile.exists()){
+                    storeFile.mkdirs();
+                }
                 RandomAccessFile randomFile = new RandomAccessFile(new File(storePath), "rw");
                 randomFile.setLength(fileLength);
                 randomFile.close();
@@ -71,8 +75,10 @@ public class MutilDownHelper {
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                   Log.e("show",e.toString());
                 } catch (ExecutionException e) {
                     e.printStackTrace();
+                    Log.e("show",e.toString());
                 }
             }
         } catch (MalformedURLException e) {
