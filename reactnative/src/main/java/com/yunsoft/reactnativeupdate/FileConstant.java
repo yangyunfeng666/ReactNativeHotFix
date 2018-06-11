@@ -32,8 +32,6 @@ public class FileConstant {
         return fileConstant;
     }
 
-    public static final String FIRST_UPDATE = "firstUpdate";
-
     /**
      * bundle文件名
      */
@@ -42,7 +40,7 @@ public class FileConstant {
     /**
      * zip的文件名
      */
-    public static final String ZIP_NAME = "wan";
+    public static final String ZIP_NAME = "hotfix";
 
     /**
      * 临时存放资源文件的目录

@@ -240,3 +240,4 @@ public class ReactNativeActivity extends PreLoadReactActivity  {
 }
 ```
 gitbub 地址：[项目地址](http://172.20.8.45/android_compoment/reactnativeupdate-android.git)
+
