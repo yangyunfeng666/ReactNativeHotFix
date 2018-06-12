@@ -75,8 +75,8 @@ bintray {
         websiteUrl = PROJ_WEBSITEURL
         vcsUrl = PROJ_VCSURL
         issueTrackerUrl = PROJ_ISSUETRACKERURL
-        licenses = ["Apache-2.0"]
-        labels = ['android']    //标签
+        licenses = [PROJ_LICENSES]
+        labels = [PROJ_LABELS]    //标签
         publish = true
         publicDownloadNumbers = true
     }
