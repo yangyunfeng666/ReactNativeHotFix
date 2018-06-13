@@ -68,55 +68,31 @@ public class FileConstant {
      */
     public final String JS_PATCH_LOCAL_PATH = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + ".zip";
 
-
-//    /**
-//     * 合并后的bundle文件保存路径
-//     */
-//    public static final String JS_BUNDLE_LOCAL_PATH = JS_PATCH_LOCAL_FOLDER + File.separator +ZIP_NAME+ File.separator  + JS_BUNDLE_LOCAL_FILE;
-
     /**
      * 合并后的bundle文件保存路径
      */
     public final String JS_BUNDLE_LOCAL_PATH = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator;
 
-    /**
-     * 第二次更新后的合并后的bundle保存路径
-     */
-    public final String JS_BUNDLE_FUTURE_LOCAL_PATH = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator + FUTURE_NAME + File.separator + JS_BUNDLE_LOCAL_FILE;
 
-    /**
-     * 合并后的bundle文件保存路径
-     */
-//    public static final String JS_BUNDLE_LOCAL_PATH = JS_PATCH_LOCAL_FOLDER +"/"+ZIP_NAME+"/";
-
-    /**
-     * 除第一次外，未来解压zip后的文件目录
-     */
-    public final String FUTURE_JS_PATCH_LOCAL_FOLDER = JS_PATCH_LOCAL_FOLDER + File.separator + "future";
-
-    public final String FUTURE_PAT_PATH = FUTURE_JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator + "bundle.pat";
     //jsbundle 加载的图片文件
-    public final String DRAWABLE_PATH = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator + "drawable-mdpi";
+    public final String DRAWABLE_PATH = JS_BUNDLE_LOCAL_PATH + "drawable-mdpi";
 
     //解压后网络图片的地址
-    public final String FUTURE_DRAWABLE_PATH = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + "drawable-mdpi";
-    /**
-     * 解压后.pat文件目录
-     */
-    public final String JS_PATCH_LOCAL_FILE = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + "bundle.pat";
+    public final String FUTURE_DRAWABLE_PATH = JS_BUNDLE_LOCAL_PATH + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + "drawable-mdpi";
 
     /**
      * 解压后.pat文件目录
      */
-    public final String ALL_UPDATE_JS_LOCAL_FILE = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + JS_BUNDLE_LOCAL_FILE;
+    public final String JS_PATCH_LOCAL_FILE = JS_BUNDLE_LOCAL_PATH + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + "bundle.pat";
+
+    /**
+     * 解压后.pat文件目录
+     */
+    public final String ALL_UPDATE_JS_LOCAL_FILE = JS_BUNDLE_LOCAL_PATH + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + JS_BUNDLE_LOCAL_FILE;
 
 
     //bundle.zip 文件到解压的目录  /wan/future 文件夹  解压后文件有/wan/future/bundle/ drawable-xdpi index.bundle
-    public final String LOCAL_FOLDER = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator + FUTURE_NAME;
+    public final String LOCAL_FOLDER = JS_BUNDLE_LOCAL_PATH + FUTURE_NAME;
 
-    /**
-     * 下载URL
-     */
-    public final String JS_BUNDLE_REMOTE_URL = "http://oleeed73x.bkt.clouddn.com/" + ZIP_NAME + ".zip";
 
 }
