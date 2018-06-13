@@ -521,4 +521,4 @@ public class ReactNativeActivity extends PreLoadReactActivity  {
 }
 ```
 这里的test也是注册的组件名称。
-gitbub 地址：[项目地址](http://172.20.8.45/android_compoment/reactnativeupdate-android.git)
+gitbub 地址：[项目地址](https://github.com/yangyunfeng666/ReactNativeHotFix)
