@@ -1,9 +1,10 @@
-package com.yunsoft.reactnativeupdate.hotupdate;
+package com.kye.reactnativeupdate.hotupdate;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
-import com.yunsoft.reactnativeupdate.FileConstant;
+import com.kye.reactnativeupdate.FileConstant;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,9 +31,7 @@ public class FileUtils {
             ZipEntry zipEntry;
             String szName;
             try {
-
                 while((zipEntry = inZip.getNextEntry()) != null) {
-
                     szName = zipEntry.getName();
                     if(zipEntry.isDirectory()) {
                         szName = szName.substring(0,szName.length()-1);
@@ -164,7 +163,7 @@ public class FileUtils {
                 int byteread = -1;
                 InputStream inputStream = new FileInputStream(fOldFile);
                 FileOutputStream fileOutputStream = new FileOutputStream(target);
-                byte[] buffer = new byte[1444];
+                byte[] buffer = new byte[1024*2];
                 while ( (byteread = inputStream.read(buffer)) != -1)
                 {
                     fileOutputStream.write(buffer, 0, byteread);//三个参数，第一个参数是写的内容，
@@ -223,12 +222,12 @@ public class FileUtils {
         File file = new File(FileConstant.getInstance().JS_BUNDLE_LOCAL_PATH);
         if(file!=null&&file.isDirectory()){
             File[] fileList = file.listFiles();
-            if(fileList.length>0){
+            if(fileList!=null&&fileList.length>0){
                 for (int i = 0;i<fileList.length;i++){
                     File f =fileList[i];
-                    if(f.getName().endsWith(".bundle")){
+                    if(f.getName().trim().endsWith(".bundle")){
                         Log.e("show",f.getName());
-                        f.deleteOnExit();
+                        f.delete();
                     }
                 }
             }
@@ -239,14 +238,17 @@ public class FileUtils {
      * 通过名字删除所有的sdcardBunlde文件
      */
     public static void deleteBundleFileByName(String fileName) {
+        if(TextUtils.isEmpty(fileName)){
+            return;
+        }
         File file = new File(FileConstant.getInstance().JS_BUNDLE_LOCAL_PATH);
         if(file!=null&&file.isDirectory()){
             File[] fileList = file.listFiles();
-            if(fileList.length>0){
+            if(fileList!=null&&fileList.length>0){
                 for (int i = 0;i<fileList.length;i++){
                     File f =fileList[i];
-                    if(fileName.equals(f.getName())){
-                        f.deleteOnExit();
+                    if(fileName.trim().equals(f.getName())){
+                        f.delete();
                     }
                 }
             }
@@ -257,14 +259,17 @@ public class FileUtils {
      * 通过版本号名字删除sdcardBunlde文件
      */
     public static void deleteBundleFileByVersionCode(String versioncode) {
+        if(TextUtils.isEmpty(versioncode)){
+            return;
+        }
         File file = new File(FileConstant.getInstance().JS_BUNDLE_LOCAL_PATH);
         if(file!=null&&file.isDirectory()){
             File[] fileList = file.listFiles();
-            if(fileList.length>0){
+            if(fileList!=null&&fileList.length>0){
                 for (int i = 0;i<fileList.length;i++){
                     File f =fileList[i];
-                    if(f.getName().startsWith(versioncode)){
-                        f.deleteOnExit();
+                    if(f.getName().trim().startsWith(versioncode)){
+                        f.delete();
                     }
                 }
             }
@@ -274,14 +279,14 @@ public class FileUtils {
     /**
      * sdcard里面的drawable-mdpi图片清空
      */
-    public static void deleteAllSdcardBundleDrawable() {
+    public static void deleteAllSdcardDrawable() {
         File file = new File(FileConstant.getInstance().DRAWABLE_PATH);
         if(file!=null&&file.isDirectory()){
             File[] fileList = file.listFiles();
-            if(fileList.length>0){
+            if(fileList!=null&&fileList.length>0){
                 for (int i = 0;i<fileList.length;i++){
                     File f =fileList[i];
-                    f.deleteOnExit();
+                    f.delete();
                 }
             }
         }
@@ -290,15 +295,18 @@ public class FileUtils {
     /**
      * 以名字删除sdcard里面的drawable-mdpi图片
      */
-    public static void deleteSdcardBundleDrawableByName(String fileName) {
+    public static void deleteSdcardDrawableByName(String fileName) {
+        if(TextUtils.isEmpty(fileName)){
+            return;
+        }
         File file = new File(FileConstant.getInstance().DRAWABLE_PATH);
         if(file!=null&&file.isDirectory()){
             File[] fileList = file.listFiles();
-            if(fileList.length>0){
+            if(fileList!=null&&fileList.length>0){
                 for (int i = 0;i<fileList.length;i++){
                     File f =fileList[i];
-                    if(f.getName().equals(fileName)){
-                        f.deleteOnExit();
+                    if(fileName.trim().equals (f.getName().toString())){
+                        f.delete();
                     }
                 }
             }

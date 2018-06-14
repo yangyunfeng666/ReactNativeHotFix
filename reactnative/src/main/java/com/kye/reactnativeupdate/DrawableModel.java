@@ -1,4 +1,4 @@
-package com.yunsoft.reactnativeupdate;
+package com.kye.reactnativeupdate;
 
 /**
  * Author: yangyunfeng

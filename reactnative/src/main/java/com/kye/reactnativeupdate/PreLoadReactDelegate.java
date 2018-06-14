@@ -1,4 +1,4 @@
-package com.yunsoft.reactnativeupdate;
+package com.kye.reactnativeupdate;
 
 import android.app.Activity;
 import android.content.Intent;

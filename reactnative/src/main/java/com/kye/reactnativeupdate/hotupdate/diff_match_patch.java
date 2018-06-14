@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package com.yunsoft.reactnativeupdate.hotupdate;
+package com.kye.reactnativeupdate.hotupdate;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
