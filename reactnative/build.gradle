@@ -1,4 +1,4 @@
-
+//apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
 
 android {
@@ -7,7 +7,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -29,11 +29,12 @@ android {
             dirs 'libs'
         }
     }
+
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation 'com.android.support:appcompat-v7:26.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -41,5 +42,23 @@ dependencies {
     api "com.facebook.react:react-native:+"
     //发布开源库
 }
+
+
 //开源gradle
 apply from: './bintray.gradle'
+
+
+//publish{
+//    repoName = 'reactnative'//远程仓库名字,不指明，默认是上传到maven
+////    userOrg = 'zhengliang1995'//bintray.com的用户名
+//    groupId = 'com.key.reactnativeupdate'//jcenter上的路径
+//    artifactId = 'reactnativeupdate'//项目名称
+//    publishVersion = '1.0.0'//版本号
+//    desc = 'reactnative update for android'//描述，不重要
+//    website = 'https://github.com/yangyunfeng666/ReactNativeHotFix'//项目主页
+//}
+//tasks.withType(Javadoc) {//防止编码问题
+//    options.addStringOption('Xdoclint:none', '-quiet')
+//    options.addStringOption('encoding', 'UTF-8')
+//    options.addStringOption('charSet', 'UTF-8')
+//}

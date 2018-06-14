@@ -6,6 +6,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 
 group = PROJ_GROUP //这个gruop很重要，参考 compile 'groupId:artifactId:version'     groupId就是这个，artifactId就是包名，version就是顶部那个
+version = PROJ_VERSION //必须有这个不然，在服务器上没有版本
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
