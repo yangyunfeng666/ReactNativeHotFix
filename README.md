@@ -547,7 +547,7 @@ public static void deleteAllSdcardDrawable()
 public static void deleteSdcardDrawableByName(String fileName)
 ```
 ## 打包策略
-针对然后打包，请查看[reactnative update 打包指南](ReactNativeHotFix_PackageBuild.md)
+针对然后打包，请查看[reactnative update 打包指南](ReactNativeHotFix_PackageDirection.md)
 
 这里的test也是注册的组件名称。
 gitbub 地址：[项目地址](https://github.com/yangyunfeng666/ReactNativeHotFix.git)
