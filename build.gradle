@@ -22,9 +22,9 @@ allprojects {
         maven{
             url "$rootDir/node_modules/react-native/android"
         }
-        maven{
-            url "https://dl.bintray.com/jakercode/reactnative"
-        }
+//        maven{
+//            url "https://dl.bintray.com/jakercode/reactnative"
+//        }
     }
     // 解决 Execution failed for task':[YourLibraryName]:mavenAndroidJavadocs'.
     tasks.withType(Javadoc) {

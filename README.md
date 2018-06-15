@@ -20,7 +20,7 @@ allprojects {
 然后在app build.gradle里面添加dependencies
 ```
 dependencies {
-implementation 'com.kye.android:reactnativehotfix:1.0.0'
+implementation 'com.kye.android:reactnativeupdate:1.0.0'
 implementation 'com.facebook.react:react-native:+'
 }
 ```
@@ -372,6 +372,8 @@ public class MainActivity extends AppCompatActivity {
         }
         //注册react 入口组件
         registLocalVersion();
+        //可以自定义删除你是版本
+		FileUtils.deleteBundleFileByName("");
 
     }
 
@@ -520,5 +522,34 @@ public class ReactNativeActivity extends PreLoadReactActivity  {
     }
 }
 ```
+### 额外扩展
+1.针对sdcard类的bundle版本和图片资源的管理在FileUtil里面添加了如下方法
+```
+/**
+ * 删除所有的sdcardBunlde文件
+ */
+public static void deleteAllBundleFile();
+/**
+ * 通过名字删除所有的sdcardBunlde文件
+ */
+public static void deleteBundleFileByName(String fileName);
+/**
+ * 通过版本号名字删除sdcardBunlde文件
+ */
+public static void deleteBundleFileByVersionCode(String versioncode)
+/**
+ * sdcard里面的drawable-mdpi图片清空
+ */
+public static void deleteAllSdcardDrawable()
+/**
+ * 以名字删除sdcard里面的drawable-mdpi图片
+ */
+public static void deleteSdcardDrawableByName(String fileName)
+```
+## 打包策略
+针对然后打包，请查看[reactnative update 打包指南](ReactNativeHotFix_PackageBuild.md)
+
 这里的test也是注册的组件名称。
-gitbub 地址：[项目地址](https://github.com/yangyunfeng666/ReactNativeHotFix)
+gitbub 地址：[项目地址](https://github.com/yangyunfeng666/ReactNativeHotFix.git)
+
+
