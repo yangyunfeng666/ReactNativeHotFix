@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private Button back_btn;
     private Button into_btn;
     public static final int DOWNLOAD_FINISH = 10202;
+    public static final int DOWNLOAD_FAIL = 10203;
+
     private UpdateModel updateModel;//模拟网络更新得到的model对象
 
     //全量更新
@@ -75,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
                     case DOWNLOAD_FINISH://解压处理合并处理
                         Log.e("show", "version:" + "解压");
                         HotUpdate.handleZIP(getApplicationContext(), mActivity.get().updateModel.getNow_version(), mActivity.get().updateModel.getOld_version(), mActivity.get().updateModel.isAllUpdate(), mActivity.get().handler);
+                        break;
+                    case DOWNLOAD_FAIL:
+                        //下载失败的提示
+                                            Log.e("show", "下载失败");
                         break;
                 }
             }
@@ -202,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 if (result == 1) {
                     handler.sendEmptyMessage(DOWNLOAD_FINISH);
                 } else {
-                    Log.e("show", "下载失败");
+                    handler.sendEmptyMessage(DOWNLOAD_FAIL);
                 }
             }
         }).start();
