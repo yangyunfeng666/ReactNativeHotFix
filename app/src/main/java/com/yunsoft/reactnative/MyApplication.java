@@ -47,6 +47,7 @@ public class MyApplication extends Application implements ReactApplication {
             protected List<ReactPackage> getPackages() {
                 List<ReactPackage> d = new ArrayList<>();
                 d.add(new MainReactPackage());
+
                 return d;
             }
 
