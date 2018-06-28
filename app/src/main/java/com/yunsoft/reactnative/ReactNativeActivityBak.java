@@ -1,19 +1,24 @@
 package com.yunsoft.reactnative;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
+import com.imagepicker.ImagePickerPackage;
 import com.kye.reactnativeupdate.FileConstant;
 import com.kye.reactnativeupdate.PreLoadReactActivity;
+import com.oblongmana.webviewfileuploadandroid.AndroidWebViewPackage;
 
 import java.io.File;
 
@@ -24,7 +29,6 @@ import java.io.File;
  */
 
 public class ReactNativeActivityBak extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
-
     private static final String TAG = "ReactNativeActivityBak";
     private ReactRootView mReactRootView;
     private ReactInstanceManager mReactInstanceManager;
@@ -34,12 +38,17 @@ public class ReactNativeActivityBak extends AppCompatActivity implements Default
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new_version = getIntent().getStringExtra("version");
+//        new_version = getIntent().getStringExtra("version");
+        SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
+        new_version = updateShare.getString("reactive_version", "");
         mReactRootView = new ReactRootView(this);
         builder = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
+                .addPackage(new AndroidWebViewPackage())
+                .addPackage(new ImagePickerPackage())
+                .addPackage(new RNFetchBlobPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED);
 

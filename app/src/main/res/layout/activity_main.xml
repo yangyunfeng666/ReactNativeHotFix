@@ -16,6 +16,12 @@
         />
 
     <Button
+        android:id="@+id/refresh1_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="没有修改js加载图片旧版本增量更新到1.0.1"
+        />
+    <Button
         android:id="@+id/oldVersionUpdate_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

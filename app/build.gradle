@@ -54,4 +54,8 @@ dependencies {
 //    implementation project(':reactnative')
     implementation 'com.facebook.react:react-native:+'
 //    implementation(name:'reactnativehotfix-release',ext:'aar')
+    implementation project(':react-native-webview-file-upload-android')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-fetch-blob')
+
 }

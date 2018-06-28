@@ -2,12 +2,15 @@ package com.yunsoft.reactnative;
 
 import android.app.Application;
 
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.imagepicker.ImagePickerPackage;
 import com.kye.reactnativeupdate.FileConstant;
 import com.kye.reactnativeupdate.ReactNativeUpdate;
+import com.oblongmana.webviewfileuploadandroid.AndroidWebViewPackage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,7 +50,9 @@ public class MyApplication extends Application implements ReactApplication {
             protected List<ReactPackage> getPackages() {
                 List<ReactPackage> d = new ArrayList<>();
                 d.add(new MainReactPackage());
-
+                d.add(new AndroidWebViewPackage());
+                d.add(new ImagePickerPackage());
+                d.add(new RNFetchBlobPackage());
                 return d;
             }
 

@@ -35,6 +35,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String MODEL = "test";
     private Button refresh_btn;
     private Button oldVersionUpdate_btn;
     private Button allUpdate_btn;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         String version = (String) msg.obj;
                         //手动注册组件
                         ((MyApplication) mActivity.get().getApplication()).setVersion(version); //设置版本
-                        ReactNativePreLoader.preLoad(MainActivity.this, "test");//重新加载数据
+                        ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
                         SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
                         updateShare.edit().putString("reactive_version", version).apply();
                         break;
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         String version = updateShare.getString("reactive_version", "");
         Toast.makeText(this, "init version" + version, Toast.LENGTH_SHORT).show();
         ((MyApplication) getApplication().getApplicationContext()).setVersion(version); //设置版本
-        ReactNativePreLoader.preLoad(MainActivity.this, "test");//重新加载数据
+        ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
     }
 
 
@@ -183,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
             updateShare.edit().putString("reactive_version", updateModel.getNow_version()).apply();
             ((MyApplication) getApplication().getApplicationContext()).setVersion(updateModel.getNow_version()); //设置版本
-            ReactNativePreLoader.preLoad(MainActivity.this, "test");//重新加载数据
+            ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
         } else {
             Toast.makeText(this, "真正更新，请稍后...", Toast.LENGTH_SHORT).show();
             requstPermission(updateModel.getDownurl(), updateModel.getNow_version()); //下载更新好了，更新版本
