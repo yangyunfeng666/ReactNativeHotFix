@@ -1,5 +1,6 @@
 package com.yunsoft.reactnative;
 
+import com.facebook.react.ReactActivity;
 import com.kye.reactnativeupdate.PreLoadReactActivity;
 
 import static com.yunsoft.reactnative.MainActivity.MODEL;
@@ -15,7 +16,7 @@ public class ReactNativeActivity extends PreLoadReactActivity {
 
     @Override
     protected String getMainComponentName() {
-        return MODEL;
+        return "test";
     }
 
 }

@@ -7,14 +7,12 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <Button
         android:id="@+id/refresh_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="没有旧版本增量更新到1.0.1"
         />
-
 
     <Button
         android:id="@+id/oldVersionUpdate_btn"
@@ -29,6 +27,7 @@
         android:layout_height="wrap_content"
         android:text="全量更新1.0.2版本"
         />
+
     <Button
         android:id="@+id/back_btn"
         android:layout_width="match_parent"

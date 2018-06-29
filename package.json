@@ -1,11 +1,13 @@
 {
-  "name": "Test",
+  "name": "KYE",
   "version": "1.0.0",
   "description": "test object",
   "main": "index.js",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "android": "react-native run-android",
+    "bundleAndroid": "react-native bundle --entry-file index.android.js --bundle-output ./app/src/main/assets/index.android.bundle --platform android --assets-dest ./app/src/main/res/ --dev false"
   },
   "keywords": [
     "react",

@@ -36,7 +36,6 @@ import java.util.List;
 public class MainActivityBak extends AppCompatActivity {
 
     private Button refresh_btn;
-    private Button refresh1_btn;
     private Button oldVersionUpdate_btn;
     private Button allUpdate_btn;
     private Button back_btn;
@@ -45,15 +44,13 @@ public class MainActivityBak extends AppCompatActivity {
     public static final int DOWNLOAD_FAIL = 10203;
 
     private UpdateModel updateModel;//模拟网络更新得到的model对象
-
-    //全量更新
-    private String downUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/update/new/bundle.zip";
+    //全量更新增量1.0.2
+    private String downUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/newupdate/all/bundle.zip";
+    //增量更新
+    private String addUpdate = "https://raw.githubusercontent.com/yangyunfeng666/image/master/newupdate/bundle.zip";
     //增量更新1.0.3在1.0.1上的增量更新版本下载地址
-    private String addUpdate = "https://raw.githubusercontent.com/yangyunfeng666/image/master/new/bundle.zip";
-    //增量更新到1.0.1
-    private String newUpdateUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/update/bundle.zip"; //增量更新到1.0.1
+    private String newUpdateUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/add/bundle.zip";
 
-    private String newUpdateUrl1 = "https://raw.githubusercontent.com/yangyunfeng666/image/master/update/nojs/bundle.zip";
     //更新通知hander
     private class MyHander extends Handler {
         SoftReference<MainActivityBak> mActivity;
@@ -72,7 +69,7 @@ public class MainActivityBak extends AppCompatActivity {
                         String version = (String) msg.obj;
                         //手动注册组件
 //                        ((MyApplication) mActivity.get().getApplication()).setVersion(version); //设置版本
-//                        ReactNativePreLoader.preLoad(MainActivity.this, "test");//重新加载数据
+//                        ReactNativePreLoader.preLoad(MainActivityBak.this, "test");//重新加载数据
                         SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
                         updateShare.edit().putString("reactive_version", version).apply();
                         break;
@@ -94,9 +91,8 @@ public class MainActivityBak extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mainbak);
         refresh_btn = findViewById(R.id.refresh_btn);
-        refresh1_btn = findViewById(R.id.refresh1_btn);
         oldVersionUpdate_btn = findViewById(R.id.oldVersionUpdate_btn);
         allUpdate_btn = findViewById(R.id.allUpdate_btn);
         back_btn = findViewById(R.id.back_btn);
@@ -125,7 +121,7 @@ public class MainActivityBak extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //增量更新 以旧版本更新
-                updateModel = new UpdateModel("1.0.3", "1.0.1", false, false,addUpdate);
+                updateModel = new UpdateModel("1.0.3", "1.0.1", false, false,newUpdateUrl);
                 update(updateModel);
             }
         });
@@ -134,25 +130,17 @@ public class MainActivityBak extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //增量更新到1.0.1
-                updateModel = new UpdateModel("1.0.1", "1.0.0", false, false,newUpdateUrl);
+                updateModel = new UpdateModel("1.0.1", "1.0.0", false, false,addUpdate);
                 update(updateModel);
             }
         });
 
-        refresh1_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //增量更新到1.0.1
-                updateModel = new UpdateModel("1.0.1", "1.0.0", false, false,newUpdateUrl1);
-                update(updateModel);
-            }
-        });
 
         //查看版本更新结果
         into_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivityBak.this, ReactNativeActivity.class);
+                Intent intent = new Intent(MainActivityBak.this, ReactNativeActivityBak.class);
                 startActivity(intent);
             }
         });
@@ -185,8 +173,8 @@ public class MainActivityBak extends AppCompatActivity {
         SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
         String version = updateShare.getString("reactive_version", "");
         Toast.makeText(this, "init version" + version, Toast.LENGTH_SHORT).show();
-        ((MyApplication) getApplication().getApplicationContext()).setVersion(version); //设置版本
-        ReactNativePreLoader.preLoad(MainActivityBak.this, "test");//重新加载数据
+//        ((MyApplication) getApplication().getApplicationContext()).setVersion(version); //设置版本
+//        ReactNativePreLoader.preLoad(MainActivityBak.this, "test");//重新加载数据
     }
 
 
@@ -195,7 +183,7 @@ public class MainActivityBak extends AppCompatActivity {
             SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
             updateShare.edit().putString("reactive_version", updateModel.getNow_version()).apply();
 //            ((MyApplication) getApplication().getApplicationContext()).setVersion(updateModel.getNow_version()); //设置版本
-//            ReactNativePreLoader.preLoad(MainActivity.this, "KYE");//重新加载数据
+//            ReactNativePreLoader.preLoad(MainActivityBak.this, "test");//重新加载数据
         } else {
             Toast.makeText(this, "真正更新，请稍后...", Toast.LENGTH_SHORT).show();
             requstPermission(updateModel.getDownurl(), updateModel.getNow_version()); //下载更新好了，更新版本

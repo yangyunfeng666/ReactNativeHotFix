@@ -98,14 +98,13 @@ export default class App extends Component<Props> {
                     </Text>
 
                     <Text style={styles.bluecoclor}>
-                        dsadsads
+                        dsadsads xxxxxxxxxx
                     </Text>
-
-                    <Image source={{uri: 'https://raw.githubusercontent.com/yangyunfeng666/image/master/room.png'}}
+                         <Image source={require('./assets/IconNew.png')} style={{width: 120, height: 80}}/>
+                         <Image source={{uri: 'https://raw.githubusercontent.com/yangyunfeng666/image/master/room.png'}}
                            style={{width: 400, height: 400}}/>
                     <Greening value='dsdsddd'/>
                     <ShowText text='喂喂喂' style={styles.bluecoclor}/>
-
                     <InputTextView multiline={true} numberOfLines={4}
                     />
                 </View>
@@ -177,4 +176,4 @@ const styles = StyleSheet.create({
     }
 });
 
-AppRegistry.registerComponent('Test', () => App);
+AppRegistry.registerComponent('test', () => App);

@@ -1,6 +1,7 @@
 package com.yunsoft.reactnative;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactApplication;
@@ -66,8 +67,10 @@ public class MyApplication extends Application implements ReactApplication {
                 //判断新版本的bundle文件时候存在
                 File file = new File(FileConstant.getInstance().JS_BUNDLE_LOCAL_PATH + version + FileConstant.SPLEX + FileConstant.JS_BUNDLE_LOCAL_FILE);
                 if (file != null && file.exists()) {
+                    Log.e("show","application load sdcard");
                     return FileConstant.getInstance().JS_BUNDLE_LOCAL_PATH + version + FileConstant.SPLEX + FileConstant.JS_BUNDLE_LOCAL_FILE;
                 } else {
+                    Log.e("show","application load assert");
                     return super.getJSBundleFile();
                 }
             }

@@ -44,12 +44,12 @@ public class ReactNativeActivityBak extends AppCompatActivity implements Default
         mReactRootView = new ReactRootView(this);
         builder = ReactInstanceManager.builder()
                 .setApplication(getApplication())
-                .setJSMainModuleName("index.android")
+//                .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
                 .addPackage(new AndroidWebViewPackage())
                 .addPackage(new ImagePickerPackage())
                 .addPackage(new RNFetchBlobPackage())
-                .setUseDeveloperSupport(BuildConfig.DEBUG)
+//                .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED);
 
         File file = new File(FileConstant.getInstance().JS_BUNDLE_LOCAL_PATH + new_version + FileConstant.SPLEX + FileConstant.JS_BUNDLE_LOCAL_FILE);
