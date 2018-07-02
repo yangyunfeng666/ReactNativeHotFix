@@ -2,7 +2,7 @@
 ### 更新方式
 #### 版本更新流程图
 ![图片](https://raw.githubusercontent.com/yangyunfeng666/image/master/reactnative_1.png)
-#### 版本回退 
+#### 版本回退
 版本回退到以前的一个版本，前提是本地存在以前版本的bundle文件。
 必须提供回退的版本号，如果没有回退的版本，会回退到app 打包的版本
 #### 全量更新
@@ -20,49 +20,26 @@ bundle压缩文件存储 index.android.bundle 文件和 drawable-xhdpi文件
 2.没有以前oldversion版本的bundle
 会把当前pat文件和app assents目录下的index.android.bundle文件合并成新的版本号的bundle文件，而且以前在drawable下面以assets开头的图片，也会合并到新的sdcard的drawable-xhdpi目录下。
 ```
-
-```flow
-st=>start: 开始
-e=>end: 更新
-ops=>operation: 是否有更新数据
-update=>operation:增量
-
-cond=>condition: 是？
-updatecond=>condition: 是否回退更新？
-allUpdate=>condition: 是否回退更新？
-oldUpdate=>condition: 是否有老版本
-addUpdate=>condition: 本地增量更新
-st->ops->cond->update
-cond(yes)->e
-cond(no)->updatecond
-updatecond(yes)->e
-updatecond(no)->allUpdate
-allUpdate(yes)->e
-allUpdate(no)->oldUpdate
-oldUpdate(yes)->e
-oldUpdate(no)->addUpdate
-addUpdate(yes)->e
-```
 ### 修改代码
 修改你的版本代码，这里包括2种情况
 ```
 1.你只修改了reactnative的代码，没有添加图片资源文件
 	如果是这种情况，你只需要打patch包或者打增量包即可
 2.你即修改了图片文件又新增了图片，或者你替换了原来的图片
-	如果是这种情况，如果你是打增量包，你需要修改ractnative的源码添加图片变量和修改加载图片资源逻辑的方法，如下**修改了图片资源打包**部分
-	但是如果你是打的是全量包，你不需要去修改源码部分，直接把新添加的图片放到drawable-mdpi文件夹即可
+	如果是这种情况，直接把新添加或者修改的图片放到drawable-mdpi文件夹或者drawable-xhdpi,这和你在application初始化的图片文件目录有关系
+	但是如果你是打的是全量包，放入index.android.bundle.js文件，否则放入bundle.pat增量包
 ```
 
 ### 生成pat 文件
-react-dispatch.jar 需要三个参数 
+react-dispatch.jar 需要三个参数
 ```
 java -jar react-dispatch.jar old/index.android.bundle new/index.android.bundle zip/bundle/bundle.pat
 1.第一参数是 旧的bundle文件的目录
 2.第二参数是 新的bundle文件的目录
-3.第三参数是 输出patch文件的目录 输出pat文件名称必须是bundle.pat 
+3.第三参数是 输出patch文件的目录 输出pat文件名称必须是bundle.pat
 ```
 ![](https://raw.githubusercontent.com/yangyunfeng666/image/master/reactnative_2.png)
-然后把生成的bundle.pat文件放到bundle文件夹中，如果你有新增的图片或者修改的图片，请把新增的图片放入，比如drawable-xhdpi中，当然如果你在Application里面初始化的图片打包地址是drawable-mdip，那么就放在drawable-mdip中，一定要一致，不然你的图片是显示不了的。在然后压缩bundle文件，变成bundle.zip文件，这个才是更新下载的压缩文件
+然后把生成的bundle.pat文件放到bundle文件夹中，如果你有新增的图片或者修改的图片，请把新增的图片放入比如drawable-xhdpi中，当然如果你在Application里面初始化的图片打包地址是drawable-mdip，那么就放在drawable-mdip中，一定要一致，不然你的图片是显示不了的。drawable-xhdpi放入bundle文件夹，在然后压缩bundle文件，变成bundle.zip文件，这个才是更新下载的压缩文件
 react-dispatch.jar 的下载地址是：
 [下载](https://raw.githubusercontent.com/yangyunfeng666/image/master/react-dispatch.jar)
 react-dispatch.jar 里面的java 代码如下
@@ -70,7 +47,7 @@ main.java
 ```
 
 public class MainClass {
-	
+
 	public static void main(String[] args) {
 		if(args.length<3){
 			return ;
@@ -80,44 +57,44 @@ public class MainClass {
 			System.out.println("输出文件不是pat文件类型结尾");
 			return;
 		}
-		String oldBundlePath = getStringFromPat(args[0]);     
-		String newBundlePath = getStringFromPat(args[1]); 
-		// 对比  
-		diff_match_patch dmp = new diff_match_patch();        
-		LinkedList<Diff> diffs = dmp.diff_main(oldBundlePath, newBundlePath);         
-		// 生成差异补丁包    
-		LinkedList<Patch> patches = dmp.patch_make(diffs);    
-		// 解析补丁包       
-		String patchesStr = dmp.patch_toText(patches);        
-		try {         
-		    // 将补丁文件写入到某个位置  
-		    Files.write(Paths.get(outPatchPath), patchesStr.getBytes());  
-		} catch (IOException e) {         
-		    // TODO Auto-generated catch block            
-		    e.printStackTrace();      
+		String oldBundlePath = getStringFromPat(args[0]);
+		String newBundlePath = getStringFromPat(args[1]);
+		// 对比
+		diff_match_patch dmp = new diff_match_patch();
+		LinkedList<Diff> diffs = dmp.diff_main(oldBundlePath, newBundlePath);
+		// 生成差异补丁包
+		LinkedList<Patch> patches = dmp.patch_make(diffs);
+		// 解析补丁包
+		String patchesStr = dmp.patch_toText(patches);
+		try {
+		    // 将补丁文件写入到某个位置
+		    Files.write(Paths.get(outPatchPath), patchesStr.getBytes());
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
 		}
 	}
-	
-	
-	 public static String getStringFromPat(String patPath) {   
-		    FileReader reader = null;      
-		    String result = "";     
-		    try {              
-		        reader = new FileReader(patPath);              
-		        int ch = reader.read();              
-		        StringBuilder sb = new StringBuilder();              
-		        while (ch != -1) {                  
-		        sb.append((char)ch);                  
-		        ch  = reader.read();                     
+
+
+	 public static String getStringFromPat(String patPath) {
+		    FileReader reader = null;
+		    String result = "";
+		    try {
+		        reader = new FileReader(patPath);
+		        int ch = reader.read();
+		        StringBuilder sb = new StringBuilder();
+		        while (ch != -1) {
+		        sb.append((char)ch);
+		        ch  = reader.read();
 		        }
-		        reader.close();  
-		        result = sb.toString();          
-		    } catch (FileNotFoundException e) {             
-		        e.printStackTrace();         
-		    } catch (IOException e) {          
-		        e.printStackTrace();        
-		    }         
-		     return result;     
+		        reader.close();
+		        result = sb.toString();
+		    } catch (FileNotFoundException e) {
+		        e.printStackTrace();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		     return result;
 		}
 }
 ```
@@ -128,8 +105,3 @@ public class MainClass {
 3.再测试全量更新到1.0.3版本，然后进入React查看效果
 4.再测试以1.0.1版本跟新到1.0.2版本，然后进入React查看效果
 5.再测试回退到1.0.1版本，然后进入React查看效果
-
-
-
-	
-
