@@ -7,7 +7,7 @@
 必须提供回退的版本号，如果没有回退的版本，会回退到app 打包的版本
 #### 全量更新
 全量下载一个新的bundle文件，但是图片可以以本地图片为基础增量。
-bundle压缩文件存储 index.android.bundle 文件和 drawable-mdpi文件
+bundle压缩文件存储 index.android.bundle 文件和 drawable-xhdpi文件
 ```
 全量更新，包括bundle文件，与比app drawable里面 新增的图片文件。（这里新增的图片指的是在原生app存放的图片上的修改或者新增，因为在热更新后，程序会默认把app里面以assets开头的图片拷贝到sdcard bundle加载路径下，这样减少了全量更新和第一次热更新的图片打包大小）
 ```
