@@ -146,7 +146,6 @@ public class FileUtils {
         if(root.exists() && root.listFiles() != null) {
             files = root.listFiles();
             for (File file : files) {
-                Log.e("show","file:"+srcFilePath+":"+destFilePath+file.getName());
                     if(!file.isDirectory()){
                         copyFile(srcFilePath+File.separator+file.getName(),destFilePath+File.separator+file.getName());
                     }

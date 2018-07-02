@@ -14,15 +14,13 @@
         android:supportsRtl="true"
         android:name=".MyApplication"
         android:theme="@style/AppTheme">
-        <!--<activity android:name=".MainActivity">-->
-        <activity android:name=".MainActivityBak">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ReactNativeActivity"></activity>
-        <activity android:name=".ReactNativeActivityBak"></activity>
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
     </application>
 

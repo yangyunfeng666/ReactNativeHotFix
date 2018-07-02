@@ -25,62 +25,21 @@ import javax.annotation.Nullable;
  * Description:this is MyApplication
  */
 
-public class MyApplication extends Application implements ReactApplication {
+public class MyApplication extends Application  {
 
-    private String version;
 
     private static MyApplication getInstance;
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
 
     public static MyApplication getInstance() {
         return getInstance;
     }
 
     @Override
-    public ReactNativeHost getReactNativeHost() {
-        return new ReactNativeHost(this) {
-            @Override
-            public boolean getUseDeveloperSupport() {
-                return BuildConfig.DEBUG;
-            }
-
-            @Override
-            protected List<ReactPackage> getPackages() {
-                List<ReactPackage> d = new ArrayList<>();
-                d.add(new MainReactPackage());
-                d.add(new AndroidWebViewPackage());
-                d.add(new ImagePickerPackage());
-                d.add(new RNFetchBlobPackage());
-                return d;
-            }
-
-            @Nullable
-            @Override
-            protected String getJSBundleFile() {
-                //如果版本为空，方法本地bundle文件
-                if ("".equals(version)) {
-                    return super.getJSBundleFile();
-                }
-                //判断新版本的bundle文件时候存在
-                File file = new File(FileConstant.getInstance().JS_BUNDLE_LOCAL_PATH + version + FileConstant.SPLEX + FileConstant.JS_BUNDLE_LOCAL_FILE);
-                if (file != null && file.exists()) {
-                    Log.e("show","application load sdcard");
-                    return FileConstant.getInstance().JS_BUNDLE_LOCAL_PATH + version + FileConstant.SPLEX + FileConstant.JS_BUNDLE_LOCAL_FILE;
-                } else {
-                    Log.e("show","application load assert");
-                    return super.getJSBundleFile();
-                }
-            }
-        };
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
-        ReactNativeUpdate.init(this);
+        //这里设置图片资源最终的打包文件是drawable-xhdpi（默认是这个），这个文件是你所有图片打包的目录，有且只有唯一,
+        //不然你更新图片资源，会找不到文件
+        ReactNativeUpdate.init(this, FileConstant.DrwableXhdpi);
         getInstance = this;
     }
 }

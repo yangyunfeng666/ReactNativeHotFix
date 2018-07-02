@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactRootView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 public class ReactNativePreLoader {
 
-    private static final Map<String,ReactRootView> CACHE = new ArrayMap<>();
+    private static final Map<String,ReactRootView> CACHE = new HashMap<>();
 
     /**
      * 初始化ReactRootView，并添加到缓存

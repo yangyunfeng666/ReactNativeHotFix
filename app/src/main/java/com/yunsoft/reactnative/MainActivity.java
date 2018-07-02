@@ -46,12 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
     private UpdateModel updateModel;//模拟网络更新得到的model对象
 
-    //全量更新
-    private String downUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/bundle.zip";
-    //增量更新
+    //全量更新到1.0.3
+    private String downUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/update/bundle.zip";
+    //增量更新1.0.2在1.0.1上的增量更新版本下载地址
     private String addUpdate = "https://raw.githubusercontent.com/yangyunfeng666/image/master/new/bundle.zip";
-    //增量更新1.0.3在1.0.1上的增量更新版本下载地址
-    private String newUpdateUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/add/bundle.zip";
+    //增量更新 1.0.0 和本地版本到1.0.1
+//    private String newUpdateUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/add/bundle.zip";
+    private String newUpdateUrl = "https://raw.githubusercontent.com/yangyunfeng666/image/master/add/new/bundle.zip";
 
     //更新通知hander
     private class MyHander extends Handler {
@@ -70,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(mActivity.get(), "更新完成", Toast.LENGTH_SHORT).show();
                         String version = (String) msg.obj;
                         //手动注册组件
-                        ((MyApplication) mActivity.get().getApplication()).setVersion(version); //设置版本
-                        ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
+//                        ((MyApplication) mActivity.get().getApplication()).setVersion(version); //设置版本
+//                        ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
                         SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
                         updateShare.edit().putString("reactive_version", version).apply();
                         break;
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //全量更新
-                updateModel = new UpdateModel("1.0.2", "", true, false,downUrl);
+                updateModel = new UpdateModel("1.0.3", "", true, false,downUrl);
                 update(updateModel);
             }
         });
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //增量更新 以旧版本更新
-                updateModel = new UpdateModel("1.0.3", "1.0.1", false, false,addUpdate);
+                updateModel = new UpdateModel("1.0.2", "1.0.1", false, false,addUpdate);
                 update(updateModel);
             }
         });
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 //增量更新
                 updateModel = new UpdateModel("1.0.1", "1.0.0", false, false,newUpdateUrl);
                 update(updateModel);
+
             }
         });
 
@@ -174,8 +176,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
         String version = updateShare.getString("reactive_version", "");
         Toast.makeText(this, "init version" + version, Toast.LENGTH_SHORT).show();
-        ((MyApplication) getApplication().getApplicationContext()).setVersion(version); //设置版本
-        ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
+//        ((MyApplication) getApplication().getApplicationContext()).setVersion(version); //设置版本
+//        ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
     }
 
 
@@ -183,10 +185,11 @@ public class MainActivity extends AppCompatActivity {
         if (updateModel.isBackToOld()) {
             SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
             updateShare.edit().putString("reactive_version", updateModel.getNow_version()).apply();
-            ((MyApplication) getApplication().getApplicationContext()).setVersion(updateModel.getNow_version()); //设置版本
-            ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
+//            ((MyApplication) getApplication().getApplicationContext()).setVersion(updateModel.getNow_version()); //设置版本
+//            ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
+            Toast.makeText(this, "回退完成", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "真正更新，请稍后...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "正在更新，请稍后...", Toast.LENGTH_SHORT).show();
             requstPermission(updateModel.getDownurl(), updateModel.getNow_version()); //下载更新好了，更新版本
         }
     }

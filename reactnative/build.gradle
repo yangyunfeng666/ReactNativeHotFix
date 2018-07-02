@@ -47,18 +47,3 @@ dependencies {
 //开源gradle
 apply from: './bintray.gradle'
 
-
-//publish{
-//    repoName = 'reactnative'//远程仓库名字,不指明，默认是上传到maven
-////    userOrg = 'zhengliang1995'//bintray.com的用户名
-//    groupId = 'com.key.reactnativeupdate'//jcenter上的路径
-//    artifactId = 'reactnativeupdate'//项目名称
-//    publishVersion = '1.0.0'//版本号
-//    desc = 'reactnative update for android'//描述，不重要
-//    website = 'https://github.com/yangyunfeng666/ReactNativeHotFix'//项目主页
-//}
-//tasks.withType(Javadoc) {//防止编码问题
-//    options.addStringOption('Xdoclint:none', '-quiet')
-//    options.addStringOption('encoding', 'UTF-8')
-//    options.addStringOption('charSet', 'UTF-8')
-//}

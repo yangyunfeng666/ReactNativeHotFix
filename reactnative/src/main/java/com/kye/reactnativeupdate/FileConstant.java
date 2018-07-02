@@ -2,8 +2,12 @@ package com.kye.reactnativeupdate;
 
 import android.app.Application;
 import android.os.Environment;
+import android.support.annotation.StringDef;
+import android.support.annotation.StringRes;
 
 import java.io.File;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Author: yangyunfeng
@@ -19,6 +23,23 @@ public class FileConstant {
     public static void init(Application application) {
         patckageName = application.getPackageName();
         fileConstant = getInstance();
+    }
+
+    public static void init(Application application, @DrwableType String drawabeName) {
+        patckageName = application.getPackageName();
+        fileConstant = getInstance();
+        fileConstant.drawabeName = drawabeName;
+    }
+
+    public final static String DrwableMdpi = "drawable-mdpi";
+    public final static String DrwableHdpi = "drawable-hdpi";
+    public final static String DrwableXhdpi = "drawable-xhdpi";
+    public final static String DrwableXXhdpi = "drawable-xxhdpi";
+    public final static String DrwableXXXhdpi = "drawable-xxxhdpi";
+
+    @StringDef({DrwableHdpi, DrwableMdpi, DrwableXhdpi, DrwableXXhdpi, DrwableXXXhdpi})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface DrwableType {
     }
 
     public static FileConstant getInstance() {
@@ -58,6 +79,12 @@ public class FileConstant {
     public static final String SPLEX = "_";
 
     /**
+     * 图片存放地址名称
+     * 默认是 drwable-xhdpi
+     */
+    private String drawabeName =  DrwableXhdpi;
+
+    /**
      * 第一次解压zip后的文件目录
      */
     public final String JS_PATCH_LOCAL_FOLDER = Environment.getExternalStorageDirectory().toString()
@@ -73,12 +100,15 @@ public class FileConstant {
      */
     public final String JS_BUNDLE_LOCAL_PATH = JS_PATCH_LOCAL_FOLDER + File.separator + ZIP_NAME + File.separator;
 
+    /**
+     * jsbundle 加载的图片文件
+     */
+    public final String DRAWABLE_PATH = JS_BUNDLE_LOCAL_PATH + drawabeName;
 
-    //jsbundle 加载的图片文件
-    public final String DRAWABLE_PATH = JS_BUNDLE_LOCAL_PATH + "drawable-mdpi";
-
-    //解压后网络图片的地址
-    public final String FUTURE_DRAWABLE_PATH = JS_BUNDLE_LOCAL_PATH + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + "drawable-mdpi";
+    /**
+     * 解压后网络图片的地址
+     */
+    public final String FUTURE_DRAWABLE_PATH = JS_BUNDLE_LOCAL_PATH + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + drawabeName;
 
     /**
      * 解压后.pat文件目录
@@ -90,8 +120,9 @@ public class FileConstant {
      */
     public final String ALL_UPDATE_JS_LOCAL_FILE = JS_BUNDLE_LOCAL_PATH + FUTURE_NAME + File.separator + NET_ZIP_FILE_NAME + File.separator + JS_BUNDLE_LOCAL_FILE;
 
-
-    //bundle.zip 文件到解压的目录  /wan/future 文件夹  解压后文件有/wan/future/bundle/ drawable-xdpi index.bundle
+    /**
+     *bundle.zip 文件到解压的目录  /wan/future 文件夹  解压后文件有/wan/future/bundle/ drawable-xdpi index.bundle
+     */
     public final String LOCAL_FOLDER = JS_BUNDLE_LOCAL_PATH + FUTURE_NAME;
 
 
