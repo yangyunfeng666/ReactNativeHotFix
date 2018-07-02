@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     case HotUpdate.UNZIP_SUCCESS://解压合并完成 注册组件和本地保存版本
                         Toast.makeText(mActivity.get(), "更新完成", Toast.LENGTH_SHORT).show();
                         String version = (String) msg.obj;
-                        //手动注册组件
-//                        ((MyApplication) mActivity.get().getApplication()).setVersion(version); //设置版本
-//                        ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
                         SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
                         updateShare.edit().putString("reactive_version", version).apply();
                         break;
@@ -161,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1001);
         }
-        //注册react 入口组件
-        registLocalVersion();
+        //显示本地最新版本
+        showLocalVersion();
 
         //可以自定义删除你是版本
         FileUtils.deleteBundleFileByName("");
@@ -172,12 +169,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 注册本地版本
      */
-    public void registLocalVersion() {
+    public void showLocalVersion() {
         SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
         String version = updateShare.getString("reactive_version", "");
         Toast.makeText(this, "init version" + version, Toast.LENGTH_SHORT).show();
-//        ((MyApplication) getApplication().getApplicationContext()).setVersion(version); //设置版本
-//        ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
     }
 
 
@@ -185,8 +180,6 @@ public class MainActivity extends AppCompatActivity {
         if (updateModel.isBackToOld()) {
             SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
             updateShare.edit().putString("reactive_version", updateModel.getNow_version()).apply();
-//            ((MyApplication) getApplication().getApplicationContext()).setVersion(updateModel.getNow_version()); //设置版本
-//            ReactNativePreLoader.preLoad(MainActivity.this, MODEL);//重新加载数据
             Toast.makeText(this, "回退完成", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "正在更新，请稍后...", Toast.LENGTH_SHORT).show();
