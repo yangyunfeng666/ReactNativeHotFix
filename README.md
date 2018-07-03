@@ -441,8 +441,8 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
                     String update = updateShare.getString("firstUpdate", "0");
                     if (update.equals("0")) {
-                        //assets 是根据你本地文件在到包成react-native
-                        final List<DrawableModel> models = UpdateUtil.getResourceByReflect(R.drawable.class,"assets");
+                         //assets 是根据你本地文件在到包成react-native 这里是因为业务原因，你需要把你的图片文件以什么开头的移动到sdcard里面
+                         final List<DrawableModel> models = UpdateUtil.getResourceByReflect(R.drawable.class,"assets","node","components");
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -554,6 +554,8 @@ index.android.js的版本分别有
 
 这里的test也是注册的组件名称。
 gitbub 地址：[项目地址](https://github.com/yangyunfeng666/ReactNativeHotFix.git)
-内网gitbub 地址：[项目地址](git@172.20.8.45:android_compoment/reactnativeupdate-android.git)
+内网gitbub 地址：[项目地址](git@1
+72.20.8.45:android_compoment/reactnativeupdate-android.git)
+[](git@github.com:yangyunfeng666/ReactNativeHotFix.git)
 
 
