@@ -1,6 +1,5 @@
 # React Native Android更新配置指南
- [ ![Download](https://api.bintray.com/packages/jakercode/reactnative/reactnativeupdate/images/download.svg?version=1.2.0) ](https://bintray.com/jakercode/reactnative/reactnativeupdate/1.2.0/link)
-
+[ ![Download](https://api.bintray.com/packages/jakercode/reactnative/reactnativeupdate/images/download.svg?version=1.3.0) ](https://bintray.com/jakercode/reactnative/reactnativeupdate/1.3.0/link)
 ## 更新流程图
 ![更新流程图](https://raw.githubusercontent.com/yangyunfeng666/image/master/react_update_1.png)
 app 启动是否先判断是否是app第一次启动，如果是，那么要把本地ractnative涉及的图片（这里严格的把图片放在assets目录下开发，否则移动的时候找不到图片），移动到sdcard加载jsbundle资源的目录drawable-mdpi下。然后读取网络数据，如果有网络数据，那么就下载网络更新的bundle.zip文件，下载完成后解压，如果更新文件有图片，那么合并到sdcard drawable-mdpi目录下，如果是增量更新，需要合并以前的jsbundle文件和下载的资源文件，重新生成新版本的jsbundle文件。然后在重新在本地注册下reactnatice的初始入口加载路径jsbundle路径，当然这个注册也有提高加载速度的功能。本更新是以react native 0.48.0为版本
@@ -23,8 +22,23 @@ allprojects {
 然后在app build.gradle里面添加dependencies
 ```
 dependencies {
-implementation 'com.kye.android:reactnativeupdate:1.2.0'
+implementation 'com.kye.android:reactnativeupdate:1.3.0'
 implementation 'com.facebook.react:react-native:+'
+}
+```
+如果提示没有找到库，那么在项目的build.gradle里面配置如下
+```
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven{
+            url "$rootDir/node_modules/react-native/android"
+        }
+        maven{
+            url "https://dl.bintray.com/jakercode/reactnative"
+        }
+    }
 }
 ```
 ### 工程导入moudle引入
