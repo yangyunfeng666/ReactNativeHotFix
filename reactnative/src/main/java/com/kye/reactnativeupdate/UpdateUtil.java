@@ -21,7 +21,7 @@ public class UpdateUtil {
     /**
      * 获取app图片名称获取图片的资源id的方法
      *
-     * @param reactPicStartCharts reactnatvie 本地到图片文件名称的开始标识的数组
+     * @param reactPicStartCharts reactnatvie 本地到图片文件名称的开始标识
      * @return
      */
     public static ArrayList<DrawableModel> getResourceByReflect(Class Draw,String... reactPicStartCharts) {
