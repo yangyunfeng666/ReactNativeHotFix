@@ -23,11 +23,8 @@ bundle压缩文件存储 index.android.bundle 文件和 drawable-xhdpi文件
 ### 修改代码
 修改你的版本代码，这里包括2种情况
 ```
-1.你只修改了reactnative的代码，没有添加图片资源文件
-	如果是这种情况，你只需要打patch包或者打增量包即可
-2.你即修改了图片文件又新增了图片，或者你替换了原来的图片
-	如果是这种情况，直接把新添加或者修改的图片放到drawable-mdpi文件夹或者drawable-xhdpi,这和你在application初始化的图片文件目录有关系
-	但是如果你是打的是全量包，放入index.android.bundle.js文件，否则放入bundle.pat增量包
+1.你只修改了reactnative的代码，没有添加图片资源文件如果是这种情况，你只需要打patch包或者打增量包即可
+2.你即修改了图片文件又新增了图片，或者你替换了原来的图片,如果是这种情况，直接把新添加或者修改的图片放到drawable-mdpi文件夹或者drawable-xhdpi,这和你在application初始化的图片文件目录有关系,但是如果你是打的是全量包，放入index.android.bundle.js文件，否则放入bundle.pat增量包
 ```
 
 ### 生成pat 文件
@@ -105,3 +102,13 @@ public class MainClass {
 3.再测试全量更新到1.0.3版本，然后进入React查看效果
 4.再测试以1.0.1版本跟新到1.0.2版本，然后进入React查看效果
 5.再测试回退到1.0.1版本，然后进入React查看效果
+### 注意
+1.图片资源，在现在版本的开发，只允许3中文件夹里面的图片被使用，components开头的文件夹和node开头的文件和assets里面的文件，因为在打包时候只能移动这个三个文件夹开头的图片2x的图片资源到sdcard，这跟app端的代码写死的。如果需要修改，需要前端app初始化移动文件夹时候添加新的文件夹前缀。
+2.所有rn使用的本地图片资源，在文件夹里面，必须是xxx@2x.png格式的。因为这样打包时候会打到drawable-xhdpi文件夹里面，而现在，app端的初始化也是drawable-xhdpi文件夹，当然可以前端代码可以修改。
+### 打包步骤
+1.修改代码
+2.如果有图片资源修改，确定图片资源，是否在三个文件夹里面，而且xxx@2x.png 格式
+3.增量更新还是，全量更新，如果是增量更新，通过jar包打增量包，生成bundle.pat文件，如果是全量更新，直接放index.android.bundle.js文件，然后是否更新图片，更新图片都放到drawable-xhdpi里面，生成bundle.zip文件
+4.放到服务器，调试下载
+5.发布版本
+
