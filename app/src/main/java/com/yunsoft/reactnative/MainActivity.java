@@ -132,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
                 //增量更新
                 updateModel = new UpdateModel("1.0.1", "1.0.0", false, false,newUpdateUrl);
                 update(updateModel);
-
             }
         });
 
@@ -221,8 +220,8 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
                     String update = updateShare.getString("firstUpdate", "0");
                     if (update.equals("0")) {
-                        //assets 是根据你本地文件在到包成react-native
-                        final List<DrawableModel> models = UpdateUtil.getResourceByReflect(R.drawable.class,"assets");
+                        //assets 是根据你本地文件在到包成react-native 这里是因为业务原因，你需要把你的图片文件以什么开头的移动到sdcard里面
+                        final List<DrawableModel> models = UpdateUtil.getResourceByReflect(R.drawable.class,"assets","node","components");
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -234,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         }).start();
+
                         updateShare.edit().putString("firstUpdate", "1").apply();
                     }
                 }

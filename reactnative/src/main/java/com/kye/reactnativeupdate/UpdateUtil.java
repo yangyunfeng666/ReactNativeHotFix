@@ -21,27 +21,30 @@ public class UpdateUtil {
     /**
      * 获取app图片名称获取图片的资源id的方法
      *
-     * @param reactPicStartCharts reactnatvie 本地到包文件的名称的开始标识
+     * @param reactPicStartCharts reactnatvie 本地到图片文件名称的开始标识的数组
      * @return
      */
-    public static ArrayList<DrawableModel> getResourceByReflect(Class Draw,String reactPicStartCharts) {
+    public static ArrayList<DrawableModel> getResourceByReflect(Class Draw,String... reactPicStartCharts) {
         Class drawable = Draw;
         ArrayList<DrawableModel> arrayList = new ArrayList();
         Field[] fields = drawable.getDeclaredFields();
         for (Field field : fields) {
-            if (field.getName().startsWith(reactPicStartCharts)) {
-                int r_id;
-                try {
-                    r_id = field.getInt(field.getName());
-                    DrawableModel model = new DrawableModel(r_id, field.getName());
-                    arrayList.add(model);
-                } catch (Exception e) {
-                    Log.e("ERROR", "PICTURE NOT　FOUND！");
+            for (String startname:reactPicStartCharts) {
+                if (field.getName().startsWith(startname)) {
+                    int r_id;
+                    try {
+                        r_id = field.getInt(field.getName());
+                        DrawableModel model = new DrawableModel(r_id, field.getName());
+                        arrayList.add(model);
+                    } catch (Exception e) {
+                        Log.e("ERROR", "PICTURE NOT　FOUND！");
+                    }
                 }
             }
         }
         return arrayList;
     }
+
 
     /**
      * 保存Bitmap 到目录
