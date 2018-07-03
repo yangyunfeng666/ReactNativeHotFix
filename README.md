@@ -89,10 +89,11 @@ public class MyApplication extends Application  {
     .....
 </>
 ```
-在你合适的时机下移动图片到sdcard/包名/wan/drawable-mdpi目录下。
+在你合适的时机下移动图片到sdcard/包名/wan/drawable-xhdpi目录下。
 代码如下
 ```
-List<DrawableModel> models = UpdateUtil.getResourceByReflect("assets");
+//assets 是根据你本地文件在到包成react-native 这里是因为业务原因，你需要把你的图片文件以什么开头的移动到sdcard里面
+final List<DrawableModel> models = UpdateUtil.getResourceByReflect(R.drawable.class,"assets","node","components");
 new Thread(new Runnable() {
     @Override
     public void run() {
@@ -112,9 +113,9 @@ new Thread(new Runnable() {
 SharedPreferences updateShare = getSharedPreferences("update", Context.MODE_PRIVATE);
 String update = updateShare.getString("firstUpdate", "0");
 if (update.equals("0")) {
-    //assets 是根据你本地文件在到包成react-native
-    final List<DrawableModel> models = UpdateUtil.getResourceByReflect(R.drawable.class,"assets");
-    new Thread(new Runnable() {
+   //assets 是根据你本地文件在到包成react-native 这里是因为业务原因，你需要把你的图片文件以什么开头的移动到sdcard里面
+   final List<DrawableModel> models = UpdateUtil.getResourceByReflect(R.drawable.class,"assets","node","components");
+   new Thread(new Runnable() {
         @Override
         public void run() {
             for (DrawableModel model : models) {
